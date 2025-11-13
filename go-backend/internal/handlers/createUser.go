@@ -1,7 +1,6 @@
-package hanlders
+package handlers
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/Planckbaka/TechBlog/go-backend/internal/db"
@@ -22,7 +21,6 @@ func CreateUserHandler(c *gin.Context) {
 	if err := c.ShouldBind(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 	}
-	fmt.Println(input)
 
 	// 2. 密码哈希（永远不要原文存密码）
 	hashed, err := bcrypt.GenerateFromPassword([]byte(input.Password), bcrypt.DefaultCost)
